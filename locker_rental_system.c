@@ -17,15 +17,42 @@ and can be implemented using
 9. conditional statements.
 */
 
-/*
-switch cases:
-Locker Rental Menu
-=============================
-1. View a locker
-2. Rent a locker
-3. End a locker rental
-4. List all locker contents
-5. Quit
+#include <stdio.h>
 
-Enter your choice (1-5): 
-*/
+#define MAX_LOCKERS 100
+#define MAX_ITEM_LENGTH 50
+
+int Lockers[MAX_LOCKERS][MAX_ITEM_LENGTH] = {0};
+
+
+int main() {
+    int userInput;
+    
+    printf("Locker Rental Menu\n=============================\n");
+    printf("1. View a locker\n2. Rent a locker\n3. End a locker rental\n4. List all locker contents\n5. Quit\n");
+    printf("\nEnter your choice (1-5): ");
+    scanf("%d", userInput);
+
+        switch (userInput)
+        {
+        case 1:
+            /* code */
+            break;
+        case 2:
+            /* code */
+            break;    
+        case 3:
+            /* code */
+            break;
+        case 4:
+            /* code */
+            break;
+        case 5:
+            printf("Exiting the program. Goodbye!\n");
+            break;    
+        default:
+            break;
+        }
+    
+    return 0;
+}

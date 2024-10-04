@@ -25,15 +25,16 @@ struct Locker {
 //100 lockers
 struct Locker lockers[MAX_LOCKERS];
 
+/*
 int menudisplay() {
-    int userInput;
+    int choice;
     printf("Locker Rental Menu\n");
     printf("=============================\n");
     printf("1. View a locker\n2. Rent a locker\n3. End a locker rental\n4. List all locker contents\n5. Quit\n");
     printf("\nEnter your choice (1-5): ");
-    scanf("%d", &userInput);
+    scanf("%d", &choice);
     return 0;
-}
+}*/
 
 //at start all lockers are empty
 void initLockers() {
@@ -57,6 +58,7 @@ void lockerCont(struct Locker lockers[], int lockerNumber) {
         return;
     } else {
         printf("Locker %d: Contents: %s\n", lockerNumber, locker->contents);
+        return;
     }
 }
 
@@ -65,19 +67,21 @@ void addcont(int lockerNumber, const char* contents) {
     strncpy(lockers[lockerNumber].contents, contents, MAX_ITEM_LENGTH - 1);
     lockers[lockerNumber].contents[MAX_ITEM_LENGTH - 1] = '\0';
     printf("Locker %d has been rented for %s storage\n", lockerNumber, contents);
+    return;
 }
 
 
 void endrent(int lockerNum) {
     if (lockers[lockerNum].empty == true) {
         printf("Locker %d is not currently rented\n", lockerNum);
+        return;
     } else {
         printf("Locker %d rental has ended, please take you %s\n", lockerNum, lockers[lockerNum].contents);
         //change flag and copy null byte into its place
         lockers[lockerNum].empty = true;
         strncpy(lockers[lockerNum].contents, lockers[lockerNum].contents, '\0');
+        return;
     }
-    return;
 }
 
 int main() {
@@ -87,15 +91,17 @@ int main() {
 
     //at start all lockers are empty
     initLockers();
-    menudisplay();
+   // menudisplay();
    
-   /* printf("Locker Rental Menu\n");
+    printf("Locker Rental Menu\n");
     printf("=============================\n");
     printf("1. View a locker\n2. Rent a locker\n3. End a locker rental\n4. List all locker contents\n5. Quit\n");
     printf("\nEnter your choice (1-5): ");
-    scanf("%d", &userInput);*/
+    scanf("%d", &userInput);
 
     do {
+        //menudisplay();
+
         switch (userInput)
         {
         case 1:{

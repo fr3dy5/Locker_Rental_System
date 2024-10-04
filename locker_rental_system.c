@@ -65,10 +65,15 @@ int main() {
  
     do {
 
+        printf("\n");
         printf("Locker Rental Menu\n");
         printf("=============================\n");
-        printf("1. View a locker\n2. Rent a locker\n3. End a locker rental\n4. List all locker contents\n5. Quit\n");
-        printf("\nEnter your choice (1-5): ");
+        printf("1. View a locker\n");
+        printf("2. Rent a locker\n");
+        printf("3. End a locker rental\n");
+        printf("4. List all locker contents\n");
+        printf("5. Quit\n");
+        printf("Enter your choice (1-5): \n");
         scanf("%d", &userInput);
 
         switch (userInput)

@@ -1,13 +1,3 @@
-/*
-1. When the user selects "View a locker," the program should prompt the user to enter a locker number (1-100) and display the contents of that locker. If the locker is empty, it should display a message indicating that the locker is empty.
-2. When the user selects "Rent a locker," the program should prompt the user to enter a locker number (1-100) and the item they want to store in the locker. If the locker is already rented, it should display a message indicating that the locker is unavailable.
-3. When the user selects "End a locker rental," the program should prompt the user to enter a locker number (1-100) and end the rental for that locker. If the locker is not currently rented, it should display a message indicating that the locker is not rented.
-4. When the user selects "List all locker contents," the program should display the contents of all rented lockers. If no lockers are currently rented, it should display a message indicating that no lockers are rented.
-5. When the user selects "Quit," the program should exit.
-6. The program should handle invalid user inputs gracefully and display appropriate error messages.
-7. The program should continue running until the user chooses to quit.
-*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -78,6 +68,8 @@ void endrent(int lockerNum) {
     }
 }
 
+
+
 int main() {
     int userInput;
     int lockerNum;
@@ -110,7 +102,7 @@ int main() {
             if (lockers[lockerNum].empty) {
                 printf("Enter the item you want to store in the locker: \n");
                 //take up to 49 char input or new line
-                scanf(" %s49[\n]", contents);
+                scanf(" %s49[^\n]", contents);
                 addcont(lockerNum, contents);
                 //switch flag to false
                 lockers[lockerNum].empty = false;
@@ -123,11 +115,12 @@ int main() {
             scanf("%d", &lockerNum);
             endrent(lockerNum);
             break;
-       /* case 4:
-            for (int i = 0;  i < MAX_LOCKERS; i++) {
+        case 4:
+            for (int i = 0;  i < MAX_LOCKERS + 1; i++) {
                 if (lockers[i].empty == false)  {
-                printf("Locker %d: %s\n", lockerNum, contents);}
-           } break;*/
+                    lockerNum = i;
+                    printf("Locker %d: %s\n", lockerNum, lockers[i].contents);}
+           } break;
         case 5:
             printf("Exiting the program. Goodbye!\n");
             break;    

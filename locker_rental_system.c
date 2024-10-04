@@ -15,17 +15,6 @@ struct Locker {
 //100 lockers
 struct Locker lockers[MAX_LOCKERS];
 
-/*
-int menudisplay() {
-    int choice;
-    printf("Locker Rental Menu\n");
-    printf("=============================\n");
-    printf("1. View a locker\n2. Rent a locker\n3. End a locker rental\n4. List all locker contents\n5. Quit\n");
-    printf("\nEnter your choice (1-5): ");
-    scanf("%d", &choice);
-    return 0;
-}*/
-
 //at start all lockers are empty
 void initLockers() {
     for( int i = 0; i < MAX_LOCKERS + 1; i++) {
@@ -56,7 +45,6 @@ void addcont(int lockerNumber, const char* contents) {
     printf("Locker %d has been rented for %s storage\n", lockerNumber, contents);
 }
 
-
 void endrent(int lockerNum) {
     if (lockers[lockerNum].empty == true) {
         printf("Locker %d is not currently rented\n", lockerNum);
@@ -68,8 +56,6 @@ void endrent(int lockerNum) {
     }
 }
 
-
-
 int main() {
     int userInput;
     int lockerNum;
@@ -77,12 +63,9 @@ int main() {
 
     //at start all lockers are empty
     initLockers();
-   // menudisplay();
-   
-
-
+ 
     do {
-        //menudisplay();
+
         printf("Locker Rental Menu\n");
         printf("=============================\n");
         printf("1. View a locker\n2. Rent a locker\n3. End a locker rental\n4. List all locker contents\n5. Quit\n");
@@ -96,6 +79,7 @@ int main() {
             scanf("%d", &lockerNum);
             lockerCont(lockers, lockerNum);
             }break;
+
         case 2:
             printf("Enter locker number (1-100): \n");
             scanf("%d", &lockerNum);
@@ -109,25 +93,30 @@ int main() {
             } else {
                 printf("Sorry but locker %d has already been rented!\n", lockerNum);
             }
-            break;    
+            break;
+
         case 3:
             printf("Enter locker number (1-100): \n");
             scanf("%d", &lockerNum);
             endrent(lockerNum);
             break;
+
         case 4:
             for (int i = 0;  i < MAX_LOCKERS + 1; i++) {
                 if (lockers[i].empty == false)  {
                     lockerNum = i;
                     printf("Locker %d: %s\n", lockerNum, lockers[i].contents);}
            } break;
+
         case 5:
             printf("Exiting the program. Goodbye!\n");
-            break;    
+            break;
+
         default:
             printf("Invalid menu choice\n");
             break;
-        } 
+        }
+
     } while (userInput != 5);
     
     return 0;

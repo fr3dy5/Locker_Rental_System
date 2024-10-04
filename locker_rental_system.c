@@ -33,19 +33,6 @@ void initLockers() {
     }
 }
 
-//if input negative or over 100 its invalid
-void add_item(int lockerNum, const char* contents) {
-    if (lockerNum < 0 || lockerNum > MAX_LOCKERS) {
-        printf("Sorry, there are only 100 lockers available.\n");
-        return;
-    }//if its not empty its taken
-    if (lockers[lockerNum].empty = false) {
-        printf("Sorry, but locker %d has already been rented!\n", lockerNum);
-        return;
-    }
-    
-}
-
 int main() {
     int userInput;
     int lockerNum;

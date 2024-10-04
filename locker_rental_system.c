@@ -25,6 +25,16 @@ struct Locker {
 //100 lockers
 struct Locker lockers[MAX_LOCKERS];
 
+int menudisplay() {
+    int userInput;
+    printf("Locker Rental Menu\n");
+    printf("=============================\n");
+    printf("1. View a locker\n2. Rent a locker\n3. End a locker rental\n4. List all locker contents\n5. Quit\n");
+    printf("\nEnter your choice (1-5): ");
+    scanf("%d", &userInput);
+    return 0;
+}
+
 //at start all lockers are empty
 void initLockers() {
     for( int i = 0; i < MAX_LOCKERS + 1; i++) {
@@ -67,6 +77,7 @@ void endrent(int lockerNum) {
         lockers[lockerNum].empty = true;
         strncpy(lockers[lockerNum].contents, lockers[lockerNum].contents, '\0');
     }
+    return;
 }
 
 int main() {
@@ -76,12 +87,13 @@ int main() {
 
     //at start all lockers are empty
     initLockers();
+    menudisplay();
    
-    printf("Locker Rental Menu\n");
+   /* printf("Locker Rental Menu\n");
     printf("=============================\n");
     printf("1. View a locker\n2. Rent a locker\n3. End a locker rental\n4. List all locker contents\n5. Quit\n");
     printf("\nEnter your choice (1-5): ");
-    scanf("%d", &userInput);
+    scanf("%d", &userInput);*/
 
     do {
         switch (userInput)

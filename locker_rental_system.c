@@ -30,7 +30,6 @@ void lockerCont(struct Locker lockers[], int lockerNumber) {
     }
                 //pointer to locker at lockerNumber-index in lockers array
     struct Locker *locker = &lockers[lockerNumber];
-    
     if (locker->empty) {
         printf("Locker %d: Empty\n", lockerNumber);
     } else {

@@ -26,7 +26,7 @@ void initLockers() {
 //check locker emptyness or print contents
 void lockerCont(struct Locker lockers[], int lockerNumber) {
     if (lockerNumber < 0 || lockerNumber >= (MAX_LOCKERS + 1)) {
-        printf("Invalid locker number.\n");
+        printf("Sorry, there are only 100 lockers available.\n");
     }
                 //pointer to locker at lockerNumber-index in lockers array
     struct Locker *locker = &lockers[lockerNumber];
@@ -73,7 +73,7 @@ int main() {
         printf("3. End a locker rental\n");
         printf("4. List all locker contents\n");
         printf("5. Quit\n");
-        printf("Enter your choice (1-5): \n");
+        printf("Enter your menu_choice (1-5): ");
         scanf("%d", &userInput);
 
         switch (userInput)
@@ -117,7 +117,7 @@ int main() {
             break;
 
         default:
-            printf("Invalid menu choice\n");
+            printf("Invalid menu_choice. Please try again.\n");
             break;
         }
 

@@ -27,16 +27,55 @@ struct Locker lockers[MAX_LOCKERS];
 
 //at start all lockers are empty
 void initLockers() {
-    for( int i = 0; i < MAX_LOCKERS; i++) {
+    for( int i = 0; i < MAX_LOCKERS + 1; i++) {
         lockers[i].empty = true;
         strcpy(lockers[i].contents, "");
+    }
+}
+
+//check locker emptyness or print contents
+void lockerCont(struct Locker lockers[], int lockerNumber) {
+    if (lockerNumber < 0 || lockerNumber >= (MAX_LOCKERS + 1)) {
+        printf("Invalid locker number.\n");
+        return;
+    }
+                //pointer to locker at lockerNumber-index in lockers array
+    struct Locker *locker = &lockers[lockerNumber];
+    
+    if (locker->empty) {
+        printf("Locker %d: Empty\n", lockerNumber);
+        return;
+    } else {
+        printf("Locker %d: Contents: %s\n", lockerNumber, locker->contents);
+    }
+}
+
+//strncpy to lockers.contents from contents minus a character and replace character with null terminator
+void addcont(int lockerNumber, const char* contents) {
+    strncpy(lockers[lockerNumber].contents, contents, MAX_ITEM_LENGTH - 1);
+    lockers[lockerNumber].contents[MAX_ITEM_LENGTH - 1] = '\0';
+    printf("Locker %d has been rented for %s storage\n", lockerNumber, contents);
+}
+
+
+void endrent(int lockerNum) {
+    if (lockers[lockerNum].empty == true) {
+        printf("Locker %d is not currently rented\n", lockerNum);
+    } else {
+        printf("Locker %d rental has ended, please take you %s\n", lockerNum, lockers[lockerNum].contents);
+        //change flag and copy null byte into its place
+        lockers[lockerNum].empty = true;
+        strncpy(lockers[lockerNum].contents, lockers[lockerNum].contents, '\0');
     }
 }
 
 int main() {
     int userInput;
     int lockerNum;
-    char contents;
+    char contents[MAX_ITEM_LENGTH];
+
+    //at start all lockers are empty
+    initLockers();
    
     printf("Locker Rental Menu\n");
     printf("=============================\n");
@@ -44,30 +83,46 @@ int main() {
     printf("\nEnter your choice (1-5): ");
     scanf("%d", &userInput);
 
+    do {
         switch (userInput)
         {
-        case 1:
-            printf("Enter locker number (1-100): %d\n", lockerNum);
-            printf("Locker %d is %s.\n", lockerNum, contents);
-            break;
+        case 1:{
+            printf("Enter locker number (1-100): \n");
+            scanf("%d", &lockerNum);
+            lockerCont(lockers, lockerNum);
+            }break;
         case 2:
-            printf("Enter locker number (1-100): %d\n", Lockers);
-            printf("Enter the item you want to store in the locker: \n", contents);
+            printf("Enter locker number (1-100): \n");
+            scanf("%d", &lockerNum);
+            if (lockers[lockerNum].empty) {
+                printf("Enter the item you want to store in the locker: \n");
+                //take up to 49 char input or new line
+                scanf(" %s49[\n]", contents);
+                addcont(lockerNum, contents);
+                //switch flag to false
+                lockers[lockerNum].empty = false;
+            } else {
+                printf("Sorry but locker %d has already been rented!\n", lockerNum);
+            }
             break;    
         case 3:
-            printf("Enter locker number (1-100): %d\n", Lockers);
-            printf("Locker %d rental has ended, please take your %s.\n", lockerNum, contents);
+            printf("Enter locker number (1-100): \n");
+            scanf("%d", &lockerNum);
+            endrent(lockerNum);
             break;
-        case 4:
-            printf("Locker %d: %s\n", lockerNum, contents);
-            break;
+       /* case 4:
+            for (int i = 0;  i < MAX_LOCKERS; i++) {
+                if (lockers[i].empty == false)  {
+                printf("Locker %d: %s\n", lockerNum, contents);}
+           } break;*/
         case 5:
             printf("Exiting the program. Goodbye!\n");
             break;    
         default:
             printf("Invalid menu choice\n");
             break;
-        }
+        } 
+    } while (userInput != 5);
     
     return 0;
 }
